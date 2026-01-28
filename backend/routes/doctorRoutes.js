@@ -3,17 +3,18 @@ const {
   applyDoctor,
   approveDoctor,
   getAllApprovedDoctors,
+  getPendingDoctors,
 } = require("../controllers/doctorController");
 
 const router = express.Router();
 
-// Doctor applies for account
 router.post("/apply", applyDoctor);
+router.post("/approve-doctor", approveDoctor);
 
-// Admin approves doctor
-router.post("/approve", approveDoctor);
+// ADMIN
+router.get("/get-pending", getPendingDoctors);
 
-// Get all approved doctors (for users)
+// USERS
 router.get("/get-all-approved", getAllApprovedDoctors);
 
 module.exports = router;

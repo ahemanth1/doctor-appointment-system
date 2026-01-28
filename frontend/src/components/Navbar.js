@@ -1,34 +1,48 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Navbar() {
-  const navigate = useNavigate();
-  const token = localStorage.getItem("token");
-
-  const logout = () => {
-    localStorage.clear();
-    navigate("/login");
-  };
-
   return (
-    <div style={{ padding: "10px", borderBottom: "1px solid #ccc" }}>
-      <Link to="/" style={{ marginRight: "10px" }}>Home</Link>
+    <nav style={styles.nav}>
+      <h2>Book A Doctor</h2>
 
-      {!token ? (
-        <>
-          <Link to="/login" style={{ marginRight: "10px" }}>Login</Link>
-          <Link to="/register">Register</Link>
-        </>
-      ) : (
-        <>
-          <Link to="/appointments" style={{ marginRight: "10px" }}>
-            My Appointments
-          </Link>
-          <button onClick={logout}>Logout</button>
-        </>
-      )}
-    </div>
+      <div style={styles.links}>
+        <Link to="/" style={styles.link}>Home</Link>
+        <Link to="/login" style={styles.link}>Login</Link>
+        <Link to="/register" style={styles.link}>Register</Link>
+
+        {/* ✅ Admin Button */}
+        <Link to="/admin" style={{ ...styles.link, ...styles.admin }}>
+          Admin
+        </Link>
+      </div>
+    </nav>
   );
 }
+
+const styles = {
+  nav: {
+    display: "flex",
+    justifyContent: "space-between",
+    padding: "15px 30px",
+    background: "#1976d2",
+    color: "white",
+  },
+  links: {
+    display: "flex",
+    gap: "15px",
+    alignItems: "center",
+  },
+  link: {
+    color: "white",
+    textDecoration: "none",
+    fontWeight: "500",
+  },
+  admin: {
+    background: "#ff9800",
+    padding: "6px 12px",
+    borderRadius: "5px",
+  },
+};
 
 export default Navbar;
